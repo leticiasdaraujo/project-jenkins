@@ -26,20 +26,20 @@ def process_temperature(target_scale, temp_value):
 
 # -------------------------------------------------------- MAIN ------------------------------------------------------ #
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Script de conversao de temperatura para CI/CD (Jenkins).")
+    parser = argparse.ArgumentParser(description="Temperature conversion script for CI/CD (Jenkins).")
     
     parser.add_argument(
         "-t", "--target", 
         choices=['C', 'F'], 
         required=True, 
-        help="Escala de destino: digite 'C' para Celsius ou 'F' para Fahrenheit."
+        help="Destination scale: type 'C' for Celsius or 'F' for Fahrenheit."
     )
     
     parser.add_argument(
         "-v", "--value", 
         type=float, 
         required=True, 
-        help="Valor numérico da temperatura a ser convertida."
+        help="Numeric value of the temperature to be converted."
     )
     
     args = parser.parse_args()
