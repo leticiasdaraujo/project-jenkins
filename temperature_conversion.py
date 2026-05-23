@@ -1,5 +1,4 @@
 import argparse
-import sys
 
 # ------------------------------------------------------------------------------------------------------ #
 # # ------------------------------------- EXAMPLE TO APPLY JENKINS ------------------------------------# #
@@ -14,7 +13,7 @@ def conversion_fah_to_celsius(fah):
 
 def conversion_celsius_to_fah(celsius):
     """Converts Celsius to Fahrenheit and returns a float."""
-    return (celsius * 2.8) + 32.0 #MUDANÇA P 2.8 --> TEM QUE DAR ERROR ;)
+    return (celsius * 1.8) + 32.0 
 
 def process_temperature(target_scale, temp_value):
     if target_scale == "C":
