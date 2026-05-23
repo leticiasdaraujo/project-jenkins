@@ -1,0 +1,1 @@
+Academic project of continuous integration using Jenkins and GitHub. The repository contains a simple Python example with build and automated test execution, demonstrating the setup and operation of the pipeline in Jenkins.
