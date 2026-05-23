@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-            cron('* * * * *')
-        }
-
     stages {
         stage('Checkout') {
             steps {
@@ -12,34 +8,38 @@ pipeline {
             }
         }
 
-        stage('Verificar Versao do Python') {
+        stage('Preparar Ambiente (Coverage)') {
             steps {
-                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" --version'
+                echo 'Instalando a biblioteca de cobertura de codigo...'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install coverage'
+                
+                echo 'Limpando dados de coberturas antigas...'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m coverage erase'
             }
         }
 
-        stage('Testar: Celsius para Fahrenheit') {
+        stage('Testar e Coletar Metricas') {
             steps {
-                echo 'Executando conversao de 30C para Fahrenheit...'
-                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" temperature_conversion.py -t F -v 30'
+                echo 'Executando testes e mapeando linhas de codigo...'
+                // Usamos "-m coverage run -a" para rodar o script rastreando o que foi testado.
+                // O "-a" (append) junta a pontuação do teste de F com a do teste de C.
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m coverage run -a temperature_conversion.py -t F -v 30'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m coverage run -a temperature_conversion.py -t C -v 100'
             }
         }
 
-        stage('Testar: Fahrenheit para Celsius') {
+        stage('Relatorio de Cobertura') {
             steps {
-                echo 'Executando conversao de 100F para Celsius...'
-                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" temperature_conversion.py -t C -v 100'
+                echo 'Gerando a porcentagem de cobertura de codigo:'
+                // Esse comando imprime a tabela com a porcentagem final
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m coverage report'
             }
         }
     }
     
     post {
         success {
-            echo 'Pipeline executada com sucesso! As conversoes funcionaram.'
-        }
-        failure {
-            echo 'Algo deu errado! Verifique os logs do console para entender o motivo.'
+            echo 'Pipeline de Cobertura executada com sucesso! Metricas geradas.'
         }
     }
 }
-
