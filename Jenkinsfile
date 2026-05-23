@@ -38,3 +38,5 @@ pipeline {
         }
     }
 }
+
+bat 'python -m py_compile temperature_conversion.py' // test 

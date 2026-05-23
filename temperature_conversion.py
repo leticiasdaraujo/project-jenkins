@@ -44,4 +44,4 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
 
-    process_temperature(args.target, args.value)
+    process_temperature(args.target, args.value
