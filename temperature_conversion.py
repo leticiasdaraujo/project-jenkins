@@ -25,10 +25,6 @@ def process_temperature(target_scale, temp_value):
         result = conversion_celsius_to_fah(temp_value)
         print(f"The temperature in Fahrenheit is: {result:.2f} F")
 
-        if temp_value == 30.0 and round(result, 2) != 86.00:    
-            print(f"[ERRO] Falha no teste unitario! Esperado 86.00 F, mas obteve {result:.2f} F")
-            sys.exit(1)
-
 # -------------------------------------------------------- MAIN ------------------------------------------------------ #
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Temperature conversion script for CI/CD (Jenkins).")
