@@ -39,4 +39,5 @@ pipeline {
     }
 }
 
-bat 'python -m py_compile temperature_conversion.py' // test 
+// bat 'python -m py_compile temperature_conversion.py' --  test2
+try-catch // bate com o valor esperado? -- test3
