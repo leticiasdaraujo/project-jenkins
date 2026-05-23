@@ -8,25 +8,23 @@ pipeline {
             }
         }
 
-        stage('Verificar Versão do Python') {
+        stage('Verificar Versao do Python') {
             steps {
-                // Mudamos de 'sh' para 'bat' porque seu Jenkins roda no Windows
-                // E mudamos de 'python3' para 'python'
-                bat 'python --version'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" --version'
             }
         }
 
         stage('Testar: Celsius para Fahrenheit') {
             steps {
                 echo 'Executando conversao de 30C para Fahrenheit...'
-                bat 'python conversor.py -t F -v 30'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" conversor.py -t F -v 30'
             }
         }
 
         stage('Testar: Fahrenheit para Celsius') {
             steps {
                 echo 'Executando conversao de 100F para Celsius...'
-                bat 'python conversor.py -t C -v 100'
+                bat '"C:\\Users\\letic\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" conversor.py -t C -v 100'
             }
         }
     }
@@ -36,7 +34,7 @@ pipeline {
             echo 'Pipeline executada com sucesso! As conversoes funcionaram.'
         }
         failure {
-            echo 'Algo deu errado! Verifique se o Python esta marcado nas variaveis de ambiente (PATH) do Windows.'
+            echo 'Algo deu errado! Verifique os logs do console para entender o motivo.'
         }
     }
 }
